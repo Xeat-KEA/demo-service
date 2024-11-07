@@ -12,15 +12,14 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout') {S
             steps {
                 git branch: 'main', url: 'https://github.com/Xeat-KEA/demo-service.git'
             }
         }
 
         stage('Build Gradle Project') {
-            steps {
-                // Gradle 실행 권한 부여
+            steps {s
                 sh '''
                     echo 'gradlew 빌드 시작'
                     chmod +x ./gradlew
@@ -41,7 +40,7 @@ pipeline {
                                 docker push "${IMAGE_NAME}:latest"
                             '''
                         }
-                    }
+                    }s
                 }
             }
         }
@@ -51,8 +50,6 @@ pipeline {
                 script {
                     sshagent(credentials: [SSH_CREDENTIALS]) {
                         sh """
-                            ssh -o StrictHostKeyChecking=no ${REMOTE_VM} '
-                                kubectl delete deployments demo-pod -n default
                                 kubectl apply -f test-pod.yaml -n default
                             '
                         """
@@ -65,6 +62,6 @@ pipeline {
     post {
         always {
             cleanWs()
-        }
+        }s
     }
 }

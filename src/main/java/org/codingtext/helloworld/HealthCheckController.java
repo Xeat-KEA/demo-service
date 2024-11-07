@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HealthCheckController {
     @GetMapping
     public String healthcheck() {
-        return "변경여부확인";
+        return "새로운 이미지로 변경되었나? replicaset: 7989687db7";
     }
 
 }
